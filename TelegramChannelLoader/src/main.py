@@ -54,6 +54,7 @@ from telethon.sessions import StringSession
     4) get-messages/id - получает все сообщения из канала по id
 '''
 
+SESSION_NAME = 'ChatLoaderBot'
 
 # gets api keys for telegram bot to log in
 def get_api_keys():
@@ -90,7 +91,9 @@ if __name__ == '__main__':
     (api_id, api_hash) = get_api_keys()
     settings = get_settings()
     init_db(settings)
-    commands.start('ChatLoaderBot', api_id, api_hash)
+    #if f"{SESSION_NAME}.session" in os.listdir():
+    #    os.remove(f"{SESSION_NAME}.session")
+    commands.start(SESSION_NAME, api_id, api_hash)
     print(f'Bot stated.')
     loop = asyncio.get_event_loop()
     loop.run_until_complete(main())

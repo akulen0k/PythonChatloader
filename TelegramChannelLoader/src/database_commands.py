@@ -41,13 +41,27 @@ def init_db(cfg):
     create_request()
     create_channels()
 
+def delete_all():
+    with psycopg.connect(
+            config["PostgresOptions"]) as aconn:
+        with aconn.cursor() as acur:
+            acur.execute(
+                """DROP TABLE messages""")
+            acur.execute(
+                """DROP TABLE requests""")
+            acur.execute(
+                """DROP TABLE channels""")
+    create_messages()
+    create_request()
+    create_channels()
+
 
 def create_messages():  # creates messages table
     with psycopg.connect(
             config["PostgresOptions"]) as aconn:
         with aconn.cursor() as acur:
             acur.execute(
-                """CREATE TABLE IF NOT EXISTS messages(
+                """CREATE TABLE IF NOT EXISTS messages( 
                 id SERIAL PRIMARY KEY, 
                 channel_id BIGINT NOT NULL,
                 date TIMESTAMP,

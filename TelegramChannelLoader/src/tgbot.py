@@ -24,8 +24,11 @@ from channel import ChannelBd
 class TgBot:
 
     def __init__(self, session_name, api_id, api_hash):
-        self.client = TelegramClient(session_name, api_id, api_hash, )
+        print(1)
+        self.client = TelegramClient(session_name, api_id, api_hash)
+        print(3)
         self.client.start()
+        print(2)
 
     # gets all messages in certain date
     def get_messages_by_date(self, channel_id, date: datetime):  # sync!!!
