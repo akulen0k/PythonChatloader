@@ -1,0 +1,4 @@
+telethon
+psycopg
+psycopg[binary,pool]
+pytz

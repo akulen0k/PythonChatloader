@@ -1,0 +1,8 @@
+INSERT INTO requests 
+(id, url, request_time) VALUES (30, '///add-channel/@u_now', '10.03.2023 1:21')
+    INSERT INTO requests
+    (url, request_time) VALUES ('https://oursite.ru/api/add-channel/@u_now', '10.03.2023 19:07')
+
+работает!!!
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())

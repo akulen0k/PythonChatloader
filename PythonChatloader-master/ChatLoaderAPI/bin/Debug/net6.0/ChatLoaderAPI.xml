@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ChatLoaderAPI</name>
+    </assembly>
+    <members>
+        <member name="T:ChatLoaderAPI.Controllers.ChatLoaderController">
+            <summary>
+            ChatLoader controller
+            </summary>
+        </member>
+        <member name="M:ChatLoaderAPI.Controllers.ChatLoaderController.AddChannel(System.String)">
+            <summary>
+            Add channel
+            </summary>
+            <param name="handle">channel handle</param>
+            <returns>smth</returns>
+        </member>
+        <member name="M:ChatLoaderAPI.Controllers.ChatLoaderController.DownloadMessageByChannelId(System.Nullable{System.Int32})">
+            <summary>
+            Get messages by id
+            </summary>
+            <param name="channelId">channel id</param>
+            <returns>smth</returns>
+        </member>
+        <member name="M:ChatLoaderAPI.Controllers.ChatLoaderController.DownloadMessagesByDate(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Download messages by dates
+            </summary>
+            <param name="channelId">channel id</param>
+            <param name="startDate">start date</param>
+            <param name="endDate">end date</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatLoaderAPI.Controllers.ChatLoaderController.ShowMessageByChannelId(System.Nullable{System.Int32})">
+            <summary>
+            Show message
+            </summary>
+            <param name="channelId">channel id</param>
+            <returns>smth</returns>
+        </member>
+        <member name="M:ChatLoaderAPI.Controllers.ChatLoaderController.GetAllChannels">
+            <summary>
+            Show all channels
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatLoaderAPI.Data_Access.DbMethods.Commit(ChatLoaderAPI.Data_Access.RequestRow,Npgsql.NpgsqlConnection)">
+            <summary>
+            test commit
+            </summary>
+            <param name="request"></param>
+            <param name="conn"></param>
+        </member>
+    </members>
+</doc>
