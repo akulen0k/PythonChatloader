@@ -68,13 +68,16 @@ def create_messages():  # creates messages table
                 message TEXT)""")
 
 
-async def get_messages(channel_id: int):  # gets all messages by chatid
+async def get_messages(id: int):  # gets all messages by chatid
     async with await psycopg.AsyncConnection.connect(
             config["PostgresOptions"]) as aconn:
         async with aconn.cursor() as acur:
+            chan = await get_channel_by_id(id)
+            if chan is None:
+                raise Exception("Channel isn't presented in database")
             rows = await acur.execute(
                 """SELECT * FROM messages WHERE 
-                channel_id = %s""", (channel_id, ))
+                channel_id = %s""", (chan.channel_id, ))
             res = await rows.fetchmany(100)  # <---- тут ограничение, потом что-нибудь придумаем
             if res is None:
                 return []

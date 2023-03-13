@@ -42,6 +42,7 @@ async def update_requests(q: asyncio.Queue) -> None:
 
 async def handle_request(q: asyncio.Queue) -> None:
     req = await q.get()
+    print('handling request')
     try:
         query = await parse_http(req.url)
         if query is None:
@@ -51,24 +52,27 @@ async def handle_request(q: asyncio.Queue) -> None:
                 cur = await bot.find_channel(query[2])
                 await add_channel(cur)
                 req.answer = f"{cur.title} was successfully added to your channels"
-            elif query[1] == 'get-messages':
+            elif query[1] == 'show-messages':
                 ch = await get_channel_by_id(int(query[2]))
                 if ch is None:
                     raise Exception("Channel was not found into database")
-                msg = await get_messages(ch.channel_id)
+                msg = await get_messages(ch.id)
                 msg1 = [str(i) for i in msg]
                 req.answer = msg1.__str__()
             elif query[1] == 'get-all-channels':
                 channels = await get_all_channels()
                 ch = [i.getChannel() for i in channels]
-                req.answer = ch
+                req.answer = ch.__str__()
+                print(f'got all channels')
             elif query[1] == 'download-messages':
                 ch = await get_channel_by_id(int(query[2]))
                 if ch is None:
                     raise Exception("Channel was not found into database")
-                await bot.get_all_messages(ch.channel_id, start_date=datetime.strptime(query[3], '%d.%m.%Y %H:%M'),
+                print(query)
+                await bot.get_all_messages(ch.channel_id, ch.handle, start_date=datetime.strptime(query[3], '%d.%m.%Y %H:%M'),
                                            end_date=datetime.strptime(query[3], '%d.%m.%Y %H:%M'))
                 req.answer = f'messages from {ch.channel_id} were successfully downloaded'
+                print(f'downloaded messages from {ch.channel_id}')
             else:
                 raise Exception("Invalid command")
         else:
@@ -78,6 +82,7 @@ async def handle_request(q: asyncio.Queue) -> None:
         req.answer = e.__str__()
         req.status = 500
     req.resp = datetime.now()
+    print(req.get_value())
     await answer_request(req)
     q.task_done()
 

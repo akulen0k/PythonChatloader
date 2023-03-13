@@ -83,7 +83,7 @@ def get_settings():
 async def main():
     q = asyncio.Queue()
     upd = [asyncio.create_task(commands.update_requests(q)) for n in range(1)]
-    handle = [asyncio.create_task(commands.handle_request(q)) for n in range(1)]
+    handle = [asyncio.create_task(commands.handle_request(q)) for n in range(100)]
     await asyncio.gather(*upd)
 
 

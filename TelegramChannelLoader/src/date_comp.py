@@ -3,7 +3,7 @@ import datetime
 
 # compares two dates only by day, month and year
 def compare_dates(a: datetime, b: datetime):
-    if a.day == b.day and a.month == b.month and a.year == b.year:
+    if a.day - 1 == b.day and a.month == b.month and a.year == b.year:
         return True
     return False
 
